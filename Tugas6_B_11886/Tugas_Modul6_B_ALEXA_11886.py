@@ -68,7 +68,7 @@ def custom_progress_bar(confidence, color1, color2):
                 else:
                     st.sidebar.error(f"Kesalahan saat memproses gambar {uploaded_file.name}: {confidence}")
             else: 
-            st.sidebar.error("Silahkan unggah setidaknya satu gambar untuk diprediksi.")
+                st.sidebar.error("Silahkan unggah setidaknya satu gambar untuk diprediksi.")
 
 if uploaded_files:
     st.sidebar.write("### Preview Gambar")
