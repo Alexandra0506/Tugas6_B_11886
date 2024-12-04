@@ -41,34 +41,34 @@ def custom_progress_bar(confidence, color1, color2):
 
     uploaded_files = st.file_uploader("Unggah Gambar (Beberapa diperbolehkan)", type=["jpg", "png", "jpeg"], accept_multiple_files=True)
 
-if st.sidebar.button("Prediksi"):
-    if uploaded_files:
-        st.sidebar.write("### Hasil Prediksi")
-        for uploaded_file in uploaded_files:
-            with open(uploaded_file.name, "wb") as f:
-                f.write(uploaded_file.getbuffer())
-            
-            label, confidence = classify_image(uploaded_file.name)
-
-            if label != "Error":
-                primary_color = "#007BFF"
-                secondary_color = "#FF4136"
-                label_color = primary_color if label == "Matang" else secondary_color
-
-                st.sidebar.write(f"**Nama File:** {uploaded_file.name}")
-                st.sidebar.markdown(f"<h4 style='color: {label_color};'>Prediksi: {label}</h4>", unsafe_allow_html=True)
-
-                st.sidebar.write("**Confidence:**")
-                for i, class_name in enumerate(class_names):
-                    st.sidebar.write(f"- {class_name}: {confidence[i] * 100:.2f}%")
-
-                custom_progress_bar(confidence, primary_color, secondary_color)
-
-                st.sidebar.write("---")
-            else:
-                st.sidebar.error(f"Kesalahan saat memproses gambar {uploaded_file.name}: {confidence}")
-        else: 
-        st.sidebar.error("Silahkan unggah setidaknya satu gambar untuk diprediksi.")
+    if st.sidebar.button("Prediksi"):
+        if uploaded_files:
+            st.sidebar.write("### Hasil Prediksi")
+            for uploaded_file in uploaded_files:
+                with open(uploaded_file.name, "wb") as f:
+                    f.write(uploaded_file.getbuffer())
+                
+                label, confidence = classify_image(uploaded_file.name)
+    
+                if label != "Error":
+                    primary_color = "#007BFF"
+                    secondary_color = "#FF4136"
+                    label_color = primary_color if label == "Matang" else secondary_color
+    
+                    st.sidebar.write(f"**Nama File:** {uploaded_file.name}")
+                    st.sidebar.markdown(f"<h4 style='color: {label_color};'>Prediksi: {label}</h4>", unsafe_allow_html=True)
+    
+                    st.sidebar.write("**Confidence:**")
+                    for i, class_name in enumerate(class_names):
+                        st.sidebar.write(f"- {class_name}: {confidence[i] * 100:.2f}%")
+    
+                    custom_progress_bar(confidence, primary_color, secondary_color)
+    
+                    st.sidebar.write("---")
+                else:
+                    st.sidebar.error(f"Kesalahan saat memproses gambar {uploaded_file.name}: {confidence}")
+            else: 
+            st.sidebar.error("Silahkan unggah setidaknya satu gambar untuk diprediksi.")
 
 if uploaded_files:
     st.sidebar.write("### Preview Gambar")
